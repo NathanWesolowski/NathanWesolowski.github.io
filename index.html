@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCP Foundation - Secure, Contain, Protect</title>
+    <title>SCP Foundation Intranet - High Command Access</title>
     <style>
         :root {
-            --color-bg-primary: #0a0a0a;
-            --color-bg-secondary: #1a1a1a;
-            --color-bg-elevated: #2a2a2a;
+            --color-bg-primary: #050505;
+            --color-bg-secondary: #111111;
+            --color-bg-elevated: #1e1e1e;
             --color-text-primary: #e0e0e0;
             --color-text-secondary: #a0a0a0;
             --color-accent: #cc0000;
@@ -39,12 +40,15 @@
             padding: 10px;
             font-weight: bold;
             border-bottom: 3px solid #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         header {
             background-color: var(--color-bg-secondary);
             border-bottom: 2px solid var(--color-border);
             padding: 20px 0;
+            border-top: 4px solid var(--color-accent);
         }
 
         .header-content {
@@ -85,6 +89,12 @@
             font-style: italic;
         }
 
+        .session-info {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
         nav {
             background-color: var(--color-bg-elevated);
             border-bottom: 1px solid var(--color-border);
@@ -96,6 +106,7 @@
             padding: 0 20px;
             display: flex;
             gap: 5px;
+            overflow-x: auto;
         }
 
         .nav-btn {
@@ -108,6 +119,7 @@
             font-size: 14px;
             transition: background-color 0.2s;
             border-bottom: 3px solid transparent;
+            white-space: nowrap;
         }
 
         .nav-btn:hover {
@@ -144,6 +156,16 @@
         .clearance-notice h2 {
             color: var(--color-accent);
             margin-bottom: 10px;
+        }
+
+        .clearance-level-label {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 4px 10px;
+            border: 1px solid var(--color-accent);
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
         }
 
         .scp-grid {
@@ -259,72 +281,17 @@
             background: #aa0000;
         }
 
-        .containment-procedures, .description-section {
+        .containment-procedures,
+        .description-section {
             margin: 30px 0;
         }
 
-        .containment-procedures h3, .description-section h3 {
+        .containment-procedures h3,
+        .description-section h3 {
             color: var(--color-accent);
             border-bottom: 2px solid var(--color-border);
             padding-bottom: 10px;
             margin-bottom: 15px;
-        }
-
-        .application-form {
-            background-color: var(--color-bg-secondary);
-            border: 2px solid var(--color-border);
-            padding: 30px;
-            max-width: 700px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--color-text-primary);
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--color-bg-primary);
-            border: 2px solid var(--color-border);
-            color: var(--color-text-primary);
-            font-family: var(--font-mono);
-            font-size: 14px;
-        }
-
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--color-accent);
-        }
-
-        .submit-btn {
-            background-color: var(--color-accent);
-            color: #fff;
-            border: none;
-            padding: 15px 40px;
-            font-family: var(--font-mono);
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .submit-btn:hover {
-            background-color: #aa0000;
         }
 
         .info-box {
@@ -382,12 +349,139 @@
             font-size: 14px;
         }
 
-        .level-0 { border-color: #888; color: #888; }
-        .level-1 { border-color: #0088ff; color: #0088ff; }
-        .level-2 { border-color: #00ff88; color: #00ff88; }
-        .level-3 { border-color: #ffcc00; color: #ffcc00; }
-        .level-4 { border-color: #ff0000; color: #ff0000; }
-        .level-5 { border-color: #ff00ff; color: #ff00ff; }
+        .level-0 {
+            border-color: #888;
+            color: #888;
+        }
+
+        .level-1 {
+            border-color: #0088ff;
+            color: #0088ff;
+        }
+
+        .level-2 {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+
+        .level-3 {
+            border-color: #ffcc00;
+            color: #ffcc00;
+        }
+
+        .level-4 {
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        .level-5 {
+            border-color: #ff00ff;
+            color: #ff00ff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background-color: var(--color-bg-secondary);
+            border: 2px solid var(--color-border);
+            padding: 15px 20px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            margin-top: 5px;
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 11px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+            text-transform: uppercase;
+        }
+
+        .status-green {
+            border-color: #00cc00;
+            color: #00cc00;
+        }
+
+        .status-yellow {
+            border-color: #ffcc00;
+            color: #ffcc00;
+        }
+
+        .status-red {
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .priority-card {
+            background-color: var(--color-bg-secondary);
+            border: 2px solid var(--color-border);
+            padding: 15px 20px;
+        }
+
+        .priority-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .logs-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .logs-list li {
+            border-bottom: 1px solid var(--color-border);
+            padding: 8px 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .logs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .log-meta {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+
+        .directive-card {
+            background-color: var(--color-bg-secondary);
+            border: 2px solid var(--color-border);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .directive-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
 
         footer {
             background-color: var(--color-bg-secondary);
@@ -398,10 +492,155 @@
             color: var(--color-text-secondary);
             font-size: 12px;
         }
+
+        /* LOGIN OVERLAY */
+        .login-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at top, #222 0, #000 55%);
+            color: #0f0;
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .login-panel {
+            background-color: #050505;
+            border: 2px solid var(--color-accent);
+            padding: 30px 30px 25px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+        }
+
+        .login-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .login-subtitle {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .login-field {
+            margin-bottom: 15px;
+        }
+
+        .login-field label {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 5px;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 10px;
+            background-color: #000;
+            border: 1px solid #333;
+            color: #0f0;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        .login-field input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .login-button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--color-accent);
+            color: #fff;
+            border: none;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .login-button:hover {
+            background-color: #aa0000;
+        }
+
+        .login-warning {
+            margin-top: 15px;
+            font-size: 10px;
+            color: #888;
+        }
+
+        .login-error {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #ff5555;
+            display: none;
+        }
+
+        .login-terminal-line {
+            font-size: 11px;
+            color: #0f0;
+            margin-bottom: 3px;
+        }
+
+        /* Redaction classes for different levels */
+        body.locked .lock-redact {
+            background-color: #000;
+            color: #000;
+        }
+
+        /* Level 3: some stuff still redacted */
+        body.level3 .redact-l3 {
+            background-color: #000;
+            color: #000;
+        }
+
+        /* Level 5: full access – no extra styles; content shows normally */
     </style>
 </head>
-<body>        <div class="warning-banner">
-        ⚠ LEVEL 4+ CLEARANCE REQUIRED | UNAUTHORIZED ACCESS WILL RESULT IN IMMEDIATE TERMINATION ⚠
+
+<body class="locked">
+    <!-- LOGIN OVERLAY -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-panel">
+            <div class="login-terminal-line">SCiPNET DIRECT ACCESS TERMINAL v3.7</div>
+            <div class="login-terminal-line">Managed by RAISA – Records and Information Security Administration</div>
+            <div class="login-terminal-line" style="margin-bottom: 10px;">THE TIME AND DATE OF YOUR ACCESS HAS BEEN
+                LOGGED.</div>
+
+            <h1 class="login-title">HIGH COMMAND AUTHENTICATION REQUIRED</h1>
+            <p class="login-subtitle">
+                Level 3 (Confidential) and Level 5 (Thaumiel / O5) credentials accepted.[web:22][web:24]
+            </p>
+
+            <div class="login-field">
+                <label for="userId">USER ID</label>
+                <input type="text" id="userId" placeholder="e.g. RESEARCHER-19 / O5-█">
+            </div>
+            <div class="login-field">
+                <label for="accessKey">ACCESS KEY</label>
+                <input type="password" id="accessKey" placeholder="••••••••">
+            </div>
+
+            <button class="login-button" id="loginButton">INITIALIZE SESSION</button>
+
+            <div class="login-error" id="loginError">ACCESS DENIED. INCIDENT LOG FORWARDED TO RAISA.</div>
+
+            <p class="login-warning">
+                Example credentials: RESEARCHER-19 / SC-Level3 (Level 3 access), O5-█ / ALPHA-1 (Level 5 access).
+            </p>
+        </div>
+    </div>
+
+    <div class="warning-banner lock-redact">
+        ⚠ LEVEL 3+/5 CLEARANCE REQUIRED – O5 NETWORK ENCLAVE – ALL ACTIVITY MONITORED BY RAISA ⚠
     </div>
 
     <header>
@@ -409,8 +648,12 @@
             <div class="logo">
                 <div class="logo-img">SCP</div>
                 <div>
-                    <h1>SCP FOUNDATION</h1>
-                    <p class="tagline">Secure, Contain, Protect</p>
+                    <h1 class="lock-redact">SCP FOUNDATION – HIGH COMMAND INTRANET</h1>
+                    <p class="tagline lock-redact">Secure, Contain, Protect</p>
+                    <p class="session-info lock-redact" id="sessionInfo">
+                        Logged in as: <span class="redacted">[ACCESS PENDING]</span> • Session ID: <span
+                            class="redacted">[REDACTED]</span> • RAISA Monitor: ACTIVE
+                    </p>
                 </div>
             </div>
         </div>
@@ -418,31 +661,165 @@
 
     <nav>
         <div class="nav-content">
-            <button class="nav-btn active" data-section="database">SCP Database</button>
+            <button class="nav-btn active" data-section="command">Command</button>
+            <button class="nav-btn" data-section="database">SCP Database</button>
             <button class="nav-btn" data-section="resources">Resources</button>
-            <button class="nav-btn" data-section="council">O5 Council</button>
+            <button class="nav-btn" data-section="logs">Logs</button>
             <button class="nav-btn" data-section="about">About</button>
+            <button class="nav-btn" data-section="raisa">RAISA Oversight</button>
         </div>
     </nav>
 
     <main>
-        <!-- SCP Database Section -->
-        <section id="database" class="section active">
-            <div class="clearance-notice">
-                <h2>⬛ CLASSIFIED DATABASE ⬛</h2>
-                <p>Level 4 Clearance Required | All Access Logged and Monitored by RAISA</p>
+        <!-- Command Dashboard Section -->
+        <section id="command" class="section active">
+            <div class="clearance-notice lock-redact">
+                <h2>O5 / HIGH COMMAND DASHBOARD</h2>
+                <p>Level 5 access shows complete data. Level 3 view is sanitized for site-wide operations only.[web:22]
+                </p>
+                <div class="clearance-level-label">Section Clearance: LEVEL 4 / O5 OVERRIDE</div>
             </div>
 
-            <h2 style="margin-bottom: 20px;">SCP Object Database</h2>
+            <h2 class="lock-redact" style="margin-bottom: 10px;">Global Containment Status</h2>
+            <p class="lock-redact" style="color: var(--color-text-secondary); font-size: 13px;">
+                Snapshot generated: <span class="redacted">[TIMESTAMP REDACTED]</span> • Values approximate and subject
+                to RAISA audit.
+            </p>
 
-            <div class="scp-grid">
+            <div class="stats-grid lock-redact">
+                <div class="stat-card">
+                    <div class="stat-label">Total Anomalous Objects (Tracked)</div>
+                    <div class="stat-value redact-l3">3,7██</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Keter-Class Assets</div>
+                    <div class="stat-value redact-l3">█3</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Containment Breaches (24h)</div>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Global Veil Integrity</div>
+                    <div class="stat-value">
+                        <span class="status-pill status-green">GREEN – STABLE</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="lock-redact" style="margin: 30px 0 10px;">Priority Anomalies – Live Overview</h2>
+            <div class="priority-grid lock-redact">
+                <div class="priority-card">
+                    <div class="priority-header">
+                        <span>SCP-173 – The Sculpture</span>
+                        <span class="status-pill status-yellow">Under Observation</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--color-text-secondary);">
+                        Location: Site-19 • Wing C • Visual contact rotation stable • Last incident: 173-██ (0
+                        casualties in last 30 days).
+                    </p>
+                </div>
+
+                <div class="priority-card">
+                    <div class="priority-header">
+                        <span>SCP-682 – Hard-to-Destroy Reptile</span>
+                        <span class="status-pill status-red redact-l3">[REDACTED]</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--color-text-secondary);" class="redact-l3">
+                        Detailed risk index available to Level 5 personnel only.
+                    </p>
+                </div>
+
+                <div class="priority-card">
+                    <div class="priority-header">
+                        <span>SCP-096 – The "Shy Guy"</span>
+                        <span class="status-pill status-green">Contained</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--color-text-secondary);">
+                        Location: Site-██ • Optical isolation confirmed • No face exposure events recorded in last 90
+                        days.
+                    </p>
+                </div>
+
+                <div class="priority-card">
+                    <div class="priority-header">
+                        <span>SCP-106 – The Old Man</span>
+                        <span class="status-pill status-yellow redact-l3">[SANITIZED]</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--color-text-secondary);" class="redact-l3">
+                        Pocket-dimension telemetry restricted to Level 5.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="lock-redact" style="margin: 30px 0 10px;">Latest Incident Log Summary</h2>
+            <div class="info-box lock-redact">
+                <ul class="logs-list">
+                    <li>
+                        <div class="log-meta">[INCIDENT ID: 19-682-2026-02-██] • Site-19 • Clearance: 4</div>
+                        <span class="redact-l3">Minor acid containment fluctuation involving SCP-682. No structural
+                            breach. MTF Nu-7 placed on alert status; event classified as Near-Breach.</span>
+                    </li>
+                    <li>
+                        <div class="log-meta">[INCIDENT ID: 17-999-2026-02-██] • Site-17 • Clearance: 2</div>
+                        Unscheduled morale event involving SCP-999 and Research Staff. Noted improvement in staff
+                        psychological baselines.
+                    </li>
+                    <li>
+                        <div class="log-meta">[INCIDENT ID: CAMPUS-087-2026-01-██] • University Front • Clearance: 3
+                        </div>
+                        Unauthorized attempt to access SCP-087 access point by civilian contractor. Class-B amnestics
+                        administered; cover story successfully deployed.
+                    </li>
+                </ul>
+            </div>
+
+            <h2 class="lock-redact" style="margin: 30px 0 10px;">O5 Council – Internal Summary</h2>
+            <div class="resources-grid lock-redact">
+                <div class="resource-card">
+                    <h3>O5 Council Overview</h3>
+                    <p style="color: var(--color-text-secondary); font-size: 13px;">
+                        The O5 Council consists of <span class="redacted">[13]</span> individuals with total strategic
+                        authority over Foundation operations.[web:19]
+                    </p>
+                    <p style="color: var(--color-text-secondary); font-size: 13px; margin-top: 10px;" class="redact-l3">
+                        Identities, locations, and internal designations are Level 5-compartmentalized.
+                    </p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Sample O5 Entries</h3>
+                    <ul>
+                        <li>O5-1 – <span class="redacted">[THE FOUNDER]</span> – Strategic Oversight</li>
+                        <li>O5-3 – <span class="redacted">[THE ANALYST]</span> – Information &amp; Veil Integrity</li>
+                        <li class="redact-l3">O5-7 – [REDACTED]</li>
+                        <li class="redact-l3">O5-13 – [REDACTED]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCP Database Section -->
+        <section id="database" class="section">
+            <div class="clearance-notice lock-redact">
+                <h2>⬛ CLASSIFIED SCP OBJECT DATABASE ⬛</h2>
+                <p>Security Clearance Level 2+ Required | Level 3 receives SCP summaries. Level 5 sees full dossiers.
+                </p>
+                <div class="clearance-level-label">Section Clearance: LEVEL 2+ • Some Entries Require LEVEL 3–5</div>
+            </div>
+
+            <h2 class="lock-redact" style="margin-bottom: 20px;">SCP Object Database</h2>
+
+            <div class="scp-grid lock-redact">
+                <!-- cards unchanged; detail is handled in modal with level logic -->
                 <div class="scp-card" data-scp="002">
                     <div class="scp-header">
                         <span class="scp-number">SCP-002</span>
                         <span class="scp-class class-euclid">EUCLID</span>
                     </div>
                     <h3 class="scp-title">The "Living" Room</h3>
-                    <p class="scp-description">SCP-002 resembles a tumorous, fleshy growth with a volume of roughly 60 m³. An iron valve hatch on one side leads to its interior, which appears to be a standard low-rent apartment.</p>
+                    <p class="scp-description">SCP-002 resembles a tumorous, fleshy growth with a volume of roughly 60
+                        m³ and an anomalous interior resembling a small apartment.</p>
                 </div>
 
                 <div class="scp-card" data-scp="049">
@@ -451,7 +828,8 @@
                         <span class="scp-class class-euclid">EUCLID</span>
                     </div>
                     <h3 class="scp-title">Plague Doctor</h3>
-                    <p class="scp-description">SCP-049 is a humanoid entity, roughly 1.9 meters in height, which bears the appearance of a medieval plague doctor. While SCP-049 appears to be wearing the thick robes and the ceramic mask indicative of that profession, the garments instead seem to have grown out of SCP-049's body over time.</p>
+                    <p class="scp-description">SCP-049 is a humanoid entity resembling a medieval plague doctor and
+                        claims to be able to cure a phenomenon it calls "The Pestilence."</p>
                 </div>
 
                 <div class="scp-card" data-scp="073">
@@ -460,7 +838,8 @@
                         <span class="scp-class class-euclid">EUCLID</span>
                     </div>
                     <h3 class="scp-title">"Cain"</h3>
-                    <p class="scp-description">SCP-073 appears to be a heavily-tanned male of Arabic or Middle Eastern descent in his early thirties. His hair and eyes are a copper color. He is otherwise totally unremarkable in appearance.</p>
+                    <p class="scp-description">SCP-073 appears as a man with extensive metallic augmentations and
+                        perfect recall of historical events.</p>
                 </div>
 
                 <div class="scp-card" data-scp="087">
@@ -469,7 +848,8 @@
                         <span class="scp-class class-euclid">EUCLID</span>
                     </div>
                     <h3 class="scp-title">The Stairwell</h3>
-                    <p class="scp-description">SCP-087 is an unlit platform staircase. Stairs descend on a 38 degree angle for 13 steps before reaching a semicircular platform approximately 3 meters in diameter. Descent direction rotates 180 degrees at each platform.</p>
+                    <p class="scp-description">SCP-087 is an unlit staircase of anomalous depth, accompanied by the
+                        sound of a crying child.</p>
                 </div>
 
                 <div class="scp-card" data-scp="096">
@@ -478,7 +858,7 @@
                         <span class="scp-class class-euclid">EUCLID</span>
                     </div>
                     <h3 class="scp-title">The "Shy Guy"</h3>
-                    <p class="scp-description">SCP-096 is a humanoid creature measuring approximately 2.38 meters in height. Subject shows very little muscle mass, with preliminary analysis of body mass suggesting mild malnutrition. Arms are grossly out of proportion with the rest of the subject's body.</p>
+                    <p class="scp-description">SCP-096 becomes extremely hostile if its face is viewed by any means.</p>
                 </div>
 
                 <div class="scp-card" data-scp="106">
@@ -487,7 +867,8 @@
                         <span class="scp-class class-keter">KETER</span>
                     </div>
                     <h3 class="scp-title">The Old Man</h3>
-                    <p class="scp-description">SCP-106 appears to be an elderly humanoid, with a general appearance of advanced decomposition. This appearance may vary, but the "rotting" quality is observed in all forms. SCP-106 causes a "corrosion" effect on all solid matter it touches, engaging a physical breakdown in materials.</p>
+                    <p class="scp-description">SCP-106 is an elderly humanoid that corrodes matter and can enter a
+                        pocket dimension.</p>
                 </div>
 
                 <div class="scp-card" data-scp="173">
@@ -496,7 +877,8 @@
                         <span class="scp-class class-euclid">EUCLID</span>
                     </div>
                     <h3 class="scp-title">The Sculpture</h3>
-                    <p class="scp-description">Moved to Site-19. Origin is as of yet unknown. It is constructed from concrete and rebar with traces of Krylon brand spray paint. SCP-173 is animate and extremely hostile. The object cannot move while within a direct line of sight.</p>
+                    <p class="scp-description">SCP-173 is animate and extremely hostile but cannot move while within
+                        direct line of sight.</p>
                 </div>
 
                 <div class="scp-card" data-scp="682">
@@ -505,7 +887,8 @@
                         <span class="scp-class class-keter">KETER</span>
                     </div>
                     <h3 class="scp-title">Hard-to-Destroy Reptile</h3>
-                    <p class="scp-description">SCP-682 is a large, vaguely reptile-like creature of unknown origin. It appears to be extremely intelligent and was observed to engage in complex communication. SCP-682 has a hatred of all life, which has been expressed in several interviews.</p>
+                    <p class="scp-description">SCP-682 is a large, adaptive reptile-like entity with high intelligence
+                        and extreme hatred of life.</p>
                 </div>
 
                 <div class="scp-card" data-scp="999">
@@ -514,19 +897,22 @@
                         <span class="scp-class class-safe">SAFE</span>
                     </div>
                     <h3 class="scp-title">The Tickle Monster</h3>
-                    <p class="scp-description">SCP-999 appears to be a large, amorphous, gelatinous mass of translucent orange slime. Subject's temperament is best described as playful and dog-like: when approached, SCP-999 will often react with overwhelming elation.</p>
+                    <p class="scp-description">SCP-999 is a friendly gelatinous entity that induces euphoria and
+                        psychological benefits.</p>
                 </div>
             </div>
         </section>
 
         <!-- Resources Section -->
         <section id="resources" class="section">
-            <div class="clearance-notice">
+            <div class="clearance-notice lock-redact">
                 <h2>Foundation Resources &amp; Documentation</h2>
-                <p>Educational Materials and Protocol References</p>
+                <p>Level 1–3 orientation material with some Level 4–5 content redacted for lower
+                    clearances.[web:22][web:50]</p>
+                <div class="clearance-level-label">Section Clearance: LEVEL 1+</div>
             </div>
 
-            <div class="resources-grid">
+            <div class="resources-grid lock-redact">
                 <div class="resource-card">
                     <h3>Object Classes</h3>
                     <ul>
@@ -541,12 +927,12 @@
                 <div class="resource-card">
                     <h3>Security Clearance Levels</h3>
                     <div style="margin-top: 10px;">
-                        <div class="security-clearance level-0">Level 0</div>
-                        <div class="security-clearance level-1">Level 1</div>
-                        <div class="security-clearance level-2">Level 2</div>
-                        <div class="security-clearance level-3">Level 3</div>
-                        <div class="security-clearance level-4">Level 4</div>
-                        <div class="security-clearance level-5">Level 5</div>
+                        <div class="security-clearance level-0">Level 0 – Public / Non-Essential</div>
+                        <div class="security-clearance level-1">Level 1 – For Official Use</div>
+                        <div class="security-clearance level-2">Level 2 – Restricted</div>
+                        <div class="security-clearance level-3">Level 3 – Confidential</div>
+                        <div class="security-clearance level-4">Level 4 – Top Secret</div>
+                        <div class="security-clearance level-5">Level 5 – Thaumiel / O5</div>
                     </div>
                 </div>
 
@@ -559,17 +945,22 @@
                         <li>Medical &amp; Psychological</li>
                         <li>Security &amp; Tactical</li>
                         <li>Administrative Services</li>
+                        <li>RAISA – Records and Information Security Administration</li>
+                        <li>Ethics Committee Liaison Office</li>
                     </ul>
                 </div>
 
                 <div class="resource-card">
-                    <h3>Foundation Sites</h3>
+                    <h3>Foundation Sites &amp; Areas</h3>
                     <ul>
-                        <li>Site-19: Primary containment facility</li>
-                        <li>Site-17: Armed Reliquary</li>
-                        <li>Site-77: Storage facility</li>
+                        <li>Site-19: Primary containment facility • Director: <span
+                                class="redacted redact-l3">[REDACTED]</span></li>
+                        <li>Site-17: Humanoid &amp; Safe/Euclid wing • Director: <span
+                                class="redacted redact-l3">[REDACTED]</span></li>
+                        <li>Site-77: Long-term storage facility</li>
                         <li>Area-14: Armed biological containment</li>
-                        <li><span class="redacted">[REDACTED]</span></li>
+                        <li><span class="redacted">[AREA-██ / SITE-██]</span>: <span
+                                class="redacted redact-l3">[REDACTED]</span></li>
                     </ul>
                 </div>
 
@@ -578,225 +969,145 @@
                     <ul>
                         <li>Containment Breach Procedures</li>
                         <li>Information Security Guidelines</li>
-                        <li>Memetic Hazard Protocols</li>
+                        <li>Memetic &amp; Infohazard Protocols</li>
                         <li>Personnel Safety Regulations</li>
                         <li>Emergency Response Procedures</li>
+                        <li class="redact-l3">Advanced Thaumiel Handling</li>
                     </ul>
                 </div>
 
                 <div class="resource-card">
-                    <h3>Research Guidelines</h3>
+                    <h3>MTF Deployment Overview</h3>
                     <ul>
-                        <li>Testing Request Forms</li>
-                        <li>Cross-Testing Authorization</li>
-                        <li>Ethics Committee Review</li>
-                        <li>Documentation Standards</li>
-                        <li>Incident Reporting</li>
+                        <li>MTF Nu-7 "Hammer Down" – Large-scale Keter response</li>
+                        <li>MTF Epsilon-11 "Nine-Tailed Fox" – Internal facility recontainment</li>
+                        <li>MTF Eta-10 "See No Evil" – Optical/memetic anomalies</li>
+                        <li>MTF Psi-7 "Home Improvement" – Structural/architectural anomalies</li>
+                        <li class="redact-l3">MTF Omega-0 "<span class="redacted">[ARCHONS]</span>" – <span
+                                class="redacted">[ACCESS DENIED]</span></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="info-box" style="margin-top: 30px;">
+            <div class="info-box lock-redact" style="margin-top: 30px;">
                 <h3 style="color: var(--color-accent); margin-bottom: 10px;">Foundation Mission Statement</h3>
-                <p>The SCP Foundation exists to contain anomalous objects, entities, and phenomena that threaten the normalcy of human existence. We operate in secret to preserve the veil of reality that protects humanity from knowledge of the anomalous.</p>
+                <p>The SCP Foundation exists to contain anomalous objects, entities, and phenomena that threaten the
+                    normalcy of human existence.[web:1]</p>
                 <p style="margin-top: 10px;"><strong>We Secure. We Contain. We Protect.</strong></p>
             </div>
         </section>
 
-        <!-- O5 Council Section -->
-        <section id="council" class="section">
-            <div class="clearance-notice">
-                <h2>⬛ O5 COUNCIL DIRECTORY ⬛</h2>
-                <p>Level 5 Clearance Required | Unauthorized Access Punishable by Immediate Termination</p>
+        <!-- Logs Section -->
+        <section id="logs" class="section">
+            <div class="clearance-notice lock-redact">
+                <h2>Incident Logs &amp; O5 Directives</h2>
+                <p>Level 3 view shows abstracts. Full logs restricted to Level 5 and above.[web:22][web:50]</p>
+                <div class="clearance-level-label">Section Clearance: LEVEL 4 / O5 OVERRIDE</div>
             </div>
 
-            <div class="info-box" style="border-left-color: #ff0000; background-color: #1a0000;">
-                <h3 style="color: var(--color-accent); margin-bottom: 10px;">⚠ SECURITY NOTICE ⚠</h3>
-                <p style="color: var(--color-accent); font-weight: bold;">This database is restricted to Level 5 personnel only. All access attempts are logged and monitored by RAISA. Unauthorized access will result in immediate disciplinary action including termination and amnestic treatment.</p>
+            <h2 class="lock-redact" style="margin-bottom: 15px;">Selected Incident Reports</h2>
+
+            <div class="info-box lock-redact">
+                <h3 style="color: var(--color-accent); margin-bottom: 5px;">Incident 173-██ – Containment
+                    Miscommunication</h3>
+                <p style="font-size: 13px; color: var(--color-text-secondary);">
+                    Date: 2026-01-██ • Location: Site-19 • Involved SCPs: SCP-173 • Clearance: 3
+                </p>
+                <p style="margin-top: 10px;">
+                    During routine container maintenance, a rotation lapse in visual contact allowed SCP-173 to move
+                    within its chamber. Resulting injuries: 2 (non-fatal). Further details available to Level 5
+                    personnel.
+                </p>
             </div>
 
-            <h2 style="margin: 30px 0 20px;">O5 Council Members</h2>
-
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <h3>O5-1 "The Founder"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Strategic Operations</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Founding member of the Council. Oversees long-term strategic planning and inter-organizational relations.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-2 "The Gardener"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Biological Containment</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> Site-19</p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Oversees all biological and organic anomaly containment. Expert in xenobiology.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-3 "The Kid"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Technology & AI</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Youngest council member. Oversees technological development and AI containment protocols.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-4 "The Ambassador"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> External Affairs</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> Site-01</p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Manages relations with Groups of Interest and government liaison operations.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-5 "Blackbird"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Finance & Resources</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Oversees Foundation funding and front organizations. Controls global financial operations.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-6 "The Cowboy"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> North American Operations</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> Site-19</p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Regional overseer for all North American Foundation operations and containment.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-7 "Green"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Temporal Anomalies</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Oversees Temporal Anomalies Department and RCT-Δt operations.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-8 "The Lesser"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Memetics & Infohazards</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> Site-15</p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Specializes in memetic hazards and information security protocols.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-9 "The Outsider"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Extraterrestrial Affairs</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Manages extraterrestrial and extradimensional anomaly containment.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-10 "The Archivist"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> RAISA Operations</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> Site-01</p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Director of RAISA. Maintains all Foundation records and database security.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-11 "The Liar"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Disinformation</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Oversees public disinformation campaigns and veil maintenance operations.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-12 "Adam"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> ACTIVE</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> Ethics Committee Liaison</p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> Site-01</p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Primary liaison between O5 Council and Ethics Committee.</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>O5-13 "Death"</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;"><strong>Status:</strong> <span style="color: var(--color-accent);">CLASSIFIED</span></p>
-                    <p style="color: var(--color-text-secondary);"><strong>Specialization:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary);"><strong>Location:</strong> <span class="redacted">[REDACTED]</span></p>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Details regarding O5-13 are classified above Level 5 clearance.</p>
-                </div>
+            <div class="info-box lock-redact">
+                <h3 style="color: var(--color-accent); margin-bottom: 5px;">Incident 682-07 – Unapproved Cross-Test
+                    Proposal</h3>
+                <p style="font-size: 13px; color: var(--color-text-secondary);">
+                    Date: 2025-12-██ • Location: Site-██ • Involved SCPs: SCP-682, SCP-███ • Clearance: 4
+                </p>
+                <p style="margin-top: 10px;" class="redact-l3">
+                    Full cross-test discussion log and Ethics Committee commentary redacted for Level 3 users.
+                </p>
+                <p style="margin-top: 10px; font-size: 13px; color: var(--color-text-secondary);">
+                    Outcome: Proposal denied. Standing directive issued prohibiting all non-O5 authorized cross-testing
+                    involving SCP-682.
+                </p>
             </div>
 
-            <div class="info-box" style="margin-top: 30px;">
-                <h3 style="color: var(--color-accent); margin-bottom: 15px;">Council Authority</h3>
-                <p>The O5 Council holds Level 5 (Thaumiel) security clearance, granting effectively unlimited access to all strategic and sensitive data within the Foundation. Council decisions are final and override all other authority.</p>
-                <p style="margin-top: 15px;"><strong>Current Status:</strong> All 13 council seats occupied | <strong>Next Review:</strong> <span class="redacted">[REDACTED]</span></p>
-            </div>
+            <h2 class="lock-redact" style="margin: 30px 0 15px;">O5-Level Directives (Abstracts)</h2>
 
-            <h2 style="margin: 30px 0 20px;">Level 5 Directives</h2>
-
-            <div class="resources-grid">
-                <div class="resource-card" style="border-left: 4px solid var(--color-accent);">
-                    <h3 style="font-size: 14px; color: var(--color-accent);">DIRECTIVE 001-ALPHA</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Veil Protocol maintenance. All operations must preserve normalcy and prevent public awareness of anomalous phenomena.</p>
+            <div class="directive-card lock-redact">
+                <div class="directive-header">
+                    <span>O5-█ Directive 2026-01 – Cross-Testing Moratorium for SCP-682</span>
+                    <span class="status-pill status-red">O5 ENFORCED</span>
                 </div>
-
-                <div class="resource-card" style="border-left: 4px solid var(--color-accent);">
-                    <h3 style="font-size: 14px; color: var(--color-accent);">DIRECTIVE 002-OMEGA</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">XK-Class scenario prevention. All Keter-class entities to be monitored for end-of-world potential.</p>
-                </div>
-
-                <div class="resource-card" style="border-left: 4px solid var(--color-accent);">
-                    <h3 style="font-size: 14px; color: var(--color-accent);">DIRECTIVE 003-SIGMA</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Ethics Committee oversight. All testing on human subjects requires Ethics Committee approval.</p>
-                </div>
-
-                <div class="resource-card" style="border-left: 4px solid var(--color-accent);">
-                    <h3 style="font-size: 14px; color: var(--color-accent);">DIRECTIVE 004-DELTA</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px; font-size: 13px;">Groups of Interest protocol. Maintain surveillance on all known GoIs. Neutralize threats as necessary.</p>
-                </div>
+                <p style="margin-top: 10px;">
+                    Effective immediately, all proposals involving direct interaction between SCP-682 and any other
+                    anomalous object are suspended, except those explicitly authorized by a majority O5 vote.
+                </p>
+                <p style="margin-top: 10px; font-size: 12px; color: var(--color-text-secondary);" class="redact-l3">
+                    Full appendix (test history and risk models) available at Level 5.
+                </p>
             </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="section">
-            <div class="clearance-notice">
+            <div class="clearance-notice lock-redact">
                 <h2>About the SCP Foundation</h2>
-                <p>Established 1██9 | Operations: Global</p>
+                <p>Established 1██9 | Operations: Global | Governance: O5 Council</p>
+                <div class="clearance-level-label">Section Clearance: LEVEL 0+ (Sanitized Overview)</div>
             </div>
 
-            <div class="info-box">
+            <div class="info-box lock-redact">
                 <h3 style="color: var(--color-accent); margin-bottom: 15px;">Foundation History</h3>
-                <p>The SCP Foundation was established in 1██9 by the original O5 Council following the consolidation of various occult and paranormal research organizations. The Foundation's creation was necessitated by a series of catastrophic anomalous events that threatened global stability and normalcy.</p>
-                <p style="margin-top: 15px;">The Foundation currently operates <span class="redacted">[REDACTED]</span> facilities across 7 continents, employing over <span class="redacted">[REDACTED]</span> personnel. Our operations are overseen by the O5 Council, whose identities remain classified at Level 5 clearance.</p>
+                <p>The SCP Foundation was established in the early 20th century following a series of anomalous events
+                    that threatened to expose the existence of the paranormal to the general public.[web:1]</p>
+                <p style="margin-top: 15px;">Since its inception, the Foundation has grown to operate <span
+                        class="redacted redact-l3">[REDACTED]</span> facilities worldwide, employing over <span
+                        class="redacted redact-l3">[REDACTED]</span> personnel across all clearance levels.</p>
             </div>
 
-            <h2 style="margin: 30px 0 20px;">Core Values</h2>
+            <h2 class="lock-redact" style="margin: 30px 0 20px;">Core Values</h2>
 
-            <div class="resources-grid">
+            <div class="resources-grid lock-redact">
                 <div class="resource-card">
                     <h3>Secure</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;">We secure anomalies that pose a threat to humanity. Through advanced containment methods and specialized facilities, we ensure these objects remain isolated from the public.</p>
+                    <p style="color: var(--color-text-secondary); margin-top: 10px;">We secure anomalies that pose a
+                        threat to humanity.[web:1]</p>
                 </div>
 
                 <div class="resource-card">
                     <h3>Contain</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;">We contain the knowledge and existence of these anomalies. Information control and memetic countermeasures prevent widespread panic and societal collapse.</p>
+                    <p style="color: var(--color-text-secondary); margin-top: 10px;">We contain the knowledge and
+                        existence of these anomalies.[web:1]</p>
                 </div>
 
                 <div class="resource-card">
                     <h3>Protect</h3>
-                    <p style="color: var(--color-text-secondary); margin-top: 10px;">We protect humanity from threats beyond normal comprehension. Our personnel sacrifice their safety and sometimes their lives to maintain the illusion of a normal world.</p>
+                    <p style="color: var(--color-text-secondary); margin-top: 10px;">We protect humanity from threats
+                        beyond normal comprehension.[web:1]</p>
                 </div>
             </div>
+        </section>
 
-            <div class="info-box" style="margin-top: 30px;">
-                <h3 style="color: var(--color-accent); margin-bottom: 15px;">Ethics and Oversight</h3>
-                <p>The Foundation operates under strict ethical guidelines enforced by the Ethics Committee. While our mission sometimes requires difficult decisions, we are committed to minimizing harm and treating all subjects—human or otherwise—with the dignity circumstances allow.</p>
-                <p style="margin-top: 10px;">All operations are subject to oversight by the O5 Council, consisting of 13 Level 5 personnel who hold absolute authority over Foundation policy and strategic direction. The Council operates above all other Foundation authority, including Site Directors and Department Heads.</p>
+        <!-- RAISA Oversight Section -->
+        <section id="raisa" class="section">
+            <div class="clearance-notice lock-redact">
+                <h2>RAISA – Records and Information Security Administration</h2>
+                <p>Automated Oversight Node • This console is monitored in real-time</p>
+                <div class="clearance-level-label">Section Clearance: LEVEL 3+ • AUDITED</div>
             </div>
 
-            <h2 style="margin: 30px 0 20px;">Global Operations</h2>
-
-            <div class="info-box">
-                <p>The Foundation maintains operations across all seven continents, with primary facilities in North America, Europe, and Asia. Mobile Task Forces are deployed globally to respond to containment breaches and secure newly discovered anomalies. All operations report directly to O5 Command.</p>
-                <p style="margin-top: 15px;"><strong>Current Status:</strong> Operational | <strong>Threat Level:</strong> <span style="color: var(--color-euclid);">MODERATE</span> | <strong>Active Containment Breaches:</strong> 3 | <strong>O5 Directives Active:</strong> 47</p>
+            <div class="info-box lock-redact">
+                <h3 style="color: var(--color-accent); margin-bottom: 10px;">Access Control Notice</h3>
+                <p>All queries, document views, and attempted exports from this intranet node are logged and
+                    cross-referenced against your clearance profile.[web:52]</p>
+                <p style="margin-top: 10px; font-size: 13px; color: var(--color-text-secondary);">
+                    Unauthorized access attempts may result in clearance reduction, reassignment, or termination of
+                    employment.
+                </p>
             </div>
         </section>
     </main>
@@ -810,10 +1121,13 @@
     </div>
 
     <footer>
-        <p><strong>SCP FOUNDATION</strong></p>
-        <p>This is a fictional creative writing website. The SCP Foundation and all contained anomalies are works of fiction.</p>
-        <p style="margin-top: 10px;">Unauthorized access to this database will result in immediate disciplinary action.</p>
-        <p style="margin-top: 5px; font-size: 10px;">&copy; 2026 SCP Foundation Database Interface</p>
+        <p><strong class="lock-redact">SCP FOUNDATION – INTERNAL USE ONLY</strong></p>
+        <p class="lock-redact">This intranet node is a fictional interface inspired by the SCP Foundation collaborative
+            writing project.</p>
+        <p class="lock-redact" style="margin-top: 10px;">Unauthorized access to this database will result in immediate
+            disciplinary action.</p>
+        <p class="lock-redact" style="margin-top: 5px; font-size: 10px;">&copy; 2026 SCP Foundation Database Interface
+        </p>
     </footer>
 
     <script>
@@ -824,146 +1138,125 @@
         navButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetSection = button.getAttribute('data-section');
-                
                 navButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                
                 sections.forEach(section => {
                     section.classList.remove('active');
-                    if (section.id === targetSection) {
-                        section.classList.add('active');
-                    }
+                    if (section.id === targetSection) section.classList.add('active');
                 });
             });
         });
 
-        // SCP Database
-        const scpData = {
-            '002': {
-                number: 'SCP-002',
-                title: 'The "Living" Room',
-                class: 'Euclid',
-                containment: 'SCP-002 is to remain connected to a suitable power supply at all times. No personnel are to enter SCP-002 under any circumstances. Physical interaction with SCP-002\'s furnishings is strictly forbidden. Any and all processes performed by SCP-002 are to be monitored.',
-                description: 'SCP-002 resembles a tumorous, fleshy growth with a volume of roughly 60 m³ (or 2000 ft³). An iron valve hatch on one side leads to its interior, which appears to be a standard low-rent apartment of modest size. One wall of the room possesses a single window, though no such opening is visible from the exterior. The room contains furniture which, upon close examination, appears to be sculpted bone, woven hair, and various other biological substances produced by the human body.',
-                additional: 'SCP-002 is currently located in Site-███. Foundation personnel have noted that the object seems to slowly "digest" organic matter that comes into contact with its interior surfaces, converting it into furniture and structural material. Detailed analysis of the molecular structure suggests that all materials originated from human tissue.'
-            },
-            '049': {
-                number: 'SCP-049',
-                title: 'Plague Doctor',
-                class: 'Euclid',
-                containment: 'SCP-049 is contained in a Standard Secure Humanoid Containment Cell in Research Sector-02 at Site-19. SCP-049 must be sedated before any attempts to transport it. During transport, SCP-049 must be secured within a Class III Humanoid Restriction Harness and monitored by no fewer than two armed guards.',
-                description: 'SCP-049 is a humanoid entity, roughly 1.9 meters in height, which bears the appearance of a medieval plague doctor. While SCP-049 appears to be wearing the thick robes and the ceramic mask indicative of that profession, the garments instead seem to have grown out of SCP-049\'s body over time. The entity is capable of speech in a variety of languages, though tends to prefer English or medieval French.',
-                additional: 'SCP-049 is generally cooperative with Foundation staff, though becomes aggressive when it believes it has encountered what it calls "The Pestilence." The exact nature of this "pestilence" is unknown; SCP-049 has been unable or unwilling to provide a concrete description. When within 2 meters of a living human (hereafter referred to as SCP-049-2), SCP-049 will attempt to touch the subject with its hands. Contact with SCP-049\'s hands invariably results in cardiac arrest, followed by "surgery" performed by SCP-049.'
-            },
-            '073': {
-                number: 'SCP-073',
-                title: '"Cain"',
-                class: 'Euclid',
-                containment: 'SCP-073 is to be kept in a two-room cell furnished with all non-organic furniture and items, and a bathroom. Meals are to be served three times a day, consisting entirely of inorganic non-living matter. All staff members interacting with SCP-073 must first read File/073-A.',
-                description: 'SCP-073 appears to be a heavily-tanned male of Arabic or Middle Eastern descent in his early thirties, 185 cm (6\'1\") tall and 75 kg (165 lbs), with black hair and blue eyes. His arms, legs, spinal cord, and shoulder blades have been replaced with artificial versions of unknown make and metal.',
-                additional: 'SCP-073 is amiable and polite to all individuals and has not shown any aggression. He is highly knowledgeable in ancient to modern history and most commonly spoken languages, showing a level of understanding of these topics far beyond that of most humans. When questioned about his name, SCP-073 will only respond with "Call me Cain."'
-            },
-            '087': {
-                number: 'SCP-087',
-                title: 'The Stairwell',
-                class: 'Euclid',
-                containment: 'SCP-087 is located in a building on the campus of [REDACTED]. The doorway has been reinforced with a steel security door, and is to remain locked at all times. Access is only permitted for scheduled tests with prior authorization.',
-                description: 'SCP-087 is an unlit platform staircase. Stairs descend on a 38 degree angle for 13 steps before reaching a semicircular platform of approximately 3 meters in diameter. Descent direction rotates 180 degrees at each platform. The design of SCP-087 limits subjects to a visual range of approximately 1.5 flights.',
-                additional: 'No light source has been able to penetrate the darkness beyond the range of descent. The distance between platform levels is always exactly 12.192 meters (40 feet). SCP-087 has been explored to approximately 200 meters of depth, though exploration continues. A face (designated SCP-087-1) has been observed on several occasions during exploration. Subjects report the sound of a distressed child crying for help from indeterminate distances below.'
-            },
-            '096': {
-                number: 'SCP-096',
-                title: 'The "Shy Guy"',
-                class: 'Euclid',
-                containment: 'SCP-096 is to be contained in its cell, a 5 m x 5 m x 5 m airtight steel cube, at all times. Weekly checks for any cracks or holes are mandatory. There are to be absolutely no video surveillance or optical tools of any kind inside SCP-096\'s cell.',
-                description: 'SCP-096 is a humanoid creature measuring approximately 2.38 meters in height. Subject shows very little muscle mass, with preliminary analysis of body mass suggesting mild malnutrition. Arms are grossly out of proportion with the rest of the subject\'s body, measuring approximately 1.5 meters each.',
-                additional: 'SCP-096 is normally extremely docile, spending most of its time sitting on the eastern wall of its containment cell. However, when someone views SCP-096\'s face, whether it be directly, via video recording, or even a photograph, it will enter a stage of considerable emotional distress. SCP-096 will then proceed to hunt down the individual who viewed its face and [DATA EXPUNGED]. 100% termination rate has been observed.'
-            },
-            '106': {
-                number: 'SCP-106',
-                title: 'The Old Man',
-                class: 'Keter',
-                containment: 'SCP-106 is to be contained in a sealed container, comprised of lead-lined steel. The container is to be sealed within forty layers of identical material, each layer separated by no less than 36cm of empty space. A human subject (D-Class personnel are preferably used) is to be contained within the center of the container at all times.',
-                description: 'SCP-106 appears to be an elderly humanoid, with a general appearance of advanced decomposition. This appearance may vary, but the "rotting" quality is observed in all forms. SCP-106 causes a "corrosion" effect in all solid matter it touches, engaging a physical breakdown in materials several seconds after contact.',
-                additional: 'SCP-106 is capable of passing through solid matter, leaving behind a large patch of its corrosion. SCP-106 is able to "vanish" inside this corrosion and appear at another location. It is unknown if this is a form of teleportation or if SCP-106 enters a type of "pocket dimension." SCP-106 appears to prefer prey between the ages of 10-25. Stalking behavior has been observed, with SCP-106 remaining motionless until prey is compromised or immobile.'
-            },
-            '173': {
-                number: 'SCP-173',
-                title: 'The Sculpture',
-                class: 'Euclid',
-                containment: 'Item SCP-173 is to be kept in a locked container at all times. When personnel must enter SCP-173\'s container, no fewer than 3 may enter at any time and the door is to be relocked behind them. At all times, two persons must maintain direct eye contact with SCP-173 until all personnel have vacated and relocked the container.',
-                description: 'Moved to Site-19. Origin is as of yet unknown. It is constructed from concrete and rebar with traces of Krylon brand spray paint. SCP-173 is animate and extremely hostile. The object cannot move while within a direct line of sight. Line of sight must not be broken at any time with SCP-173.',
-                additional: 'Personnel report sounds of scraping stone originating from within the container when no one is inside. This is considered normal. When attacked, SCP-173 will attempt to snap the victim\'s neck at the base of the skull, or strangle them. In the event of an attack, personnel are to observe Class 4 hazardous object containment procedures. A red/brown substance appears on the floor of SCP-173\'s container, resembling a combination of feces and blood.'
-            },
-            '682': {
-                number: 'SCP-682',
-                title: 'Hard-to-Destroy Reptile',
-                class: 'Keter',
-                containment: 'SCP-682 must be destroyed as soon as possible. At this time, no means available to the Foundation are capable of destroying SCP-682. SCP-682 is to be contained within a 5 m x 5 m x 5 m chamber with 25 cm reinforced acid-resistant steel plate lining all inside surfaces.',
-                description: 'SCP-682 is a large, vaguely reptile-like creature of unknown origin. It appears to be extremely intelligent and was observed to engage in complex communication with SCP-079 during their limited time of exposure. SCP-682 appears to have a hatred of all life, which has been expressed in several interviews during containment.',
-                additional: 'SCP-682 has always been observed to have extremely high strength, speed, and reflexes, though exact levels vary with its form. SCP-682\'s physical body grows and changes very quickly, growing or decreasing in size as it consumes or sheds material. SCP-682 gains energy from anything it ingests, organic or inorganic. Digestion seems to be aided by a set of filtering gills inside of SCP-682\'s nostrils, which are able to remove usable matter from any liquid solution, enabling it to constantly regenerate from the acid it is contained in.'
-            },
-            '999': {
-                number: 'SCP-999',
-                title: 'The Tickle Monster',
-                class: 'Safe',
-                containment: 'SCP-999 is allowed to freely roam the facility and does not require special containment. Although it is in the site\'s best interest to keep SCP-999 around, it may wander off from time to time, but is always eager to return, especially if it knows it will be fed.',
-                description: 'SCP-999 appears to be a large, amorphous, gelatinous mass of translucent orange slime, weighing about 54 kg (120 lbs) with a consistency similar to that of peanut butter. Subject\'s temperament is best described as playful and dog-like: when approached, SCP-999 will often react with overwhelming elation, quickly moving towards the person to embrace and begin "tickling".',
-                additional: 'Simply touching SCP-999\'s surface causes an immediate mild euphoria, which intensifies the longer one is exposed to SCP-999, and lasts long after separation from the creature. Subject\'s favorite activity is "tickle-wrestling," often by completely enveloping a person from the neck down and tickling them until asked to stop. SCP-999 has been found to have a positive effect on the mental health of all who interact with it, notably curing depression, PTSD, and various phobias.'
-            }
-        };
+        // SCP Database data (keep your existing scpData object here...)
 
-        // Modal functionality
         const modal = document.getElementById('scpModal');
         const modalBody = document.getElementById('modalBody');
         const closeModal = document.getElementById('closeModal');
         const scpCards = document.querySelectorAll('.scp-card');
+        let currentLevel = null; // 'level3' or 'level5'
 
         scpCards.forEach(card => {
             card.addEventListener('click', () => {
                 const scpId = card.getAttribute('data-scp');
                 const scp = scpData[scpId];
-                
-                if (scp) {
-                    modalBody.innerHTML = `
-                        <div class="scp-header" style="margin-bottom: 30px;">
-                            <span class="scp-number" style="font-size: 32px;">${scp.number}</span>
-                            <span class="scp-class class-${scp.class.toLowerCase()}" style="font-size: 16px; padding: 8px 16px;">${scp.class.toUpperCase()}</span>
-                        </div>
-                        <h2 style="color: var(--color-text-primary); margin-bottom: 30px;">${scp.title}</h2>
-                        
-                        <div class="containment-procedures">
-                            <h3>Special Containment Procedures</h3>
-                            <p style="color: var(--color-text-secondary);">${scp.containment}</p>
-                        </div>
-                        
-                        <div class="description-section">
-                            <h3>Description</h3>
-                            <p style="color: var(--color-text-secondary); margin-bottom: 15px;">${scp.description}</p>
-                            <p style="color: var(--color-text-secondary);">${scp.additional}</p>
-                        </div>
-                        
-                        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--color-border);">
-                            <p style="font-size: 12px; color: var(--color-text-secondary); font-style: italic;">
-                                This is a fictional SCP entry inspired by the SCP Foundation collaborative writing project.
-                            </p>
-                        </div>
-                    `;
-                    modal.classList.add('active');
-                }
+                if (!scp) return;
+
+                // At Level 3 we show partial info, at Level 5 full info
+                const containment = currentLevel === 'level3'
+                    ? scp.containment + ' Further procedural detail is redacted for your clearance level.'
+                    : scp.containment;
+                const additional = currentLevel === 'level3'
+                    ? '[Some addenda and test logs redacted at Level 3. Request O5 override for full access.]'
+                    : scp.additional;
+
+                modalBody.innerHTML = `
+                    <div class="scp-header" style="margin-bottom: 30px;">
+                        <span class="scp-number" style="font-size: 32px;">${scp.number}</span>
+                        <span class="scp-class class-${scp.class.toLowerCase()}" style="font-size: 16px; padding: 8px 16px;">${scp.class.toUpperCase()}</span>
+                    </div>
+                    <h2 style="color: var(--color-text-primary); margin-bottom: 30px;">${scp.title}</h2>
+                    
+                    <div class="containment-procedures">
+                        <h3>Special Containment Procedures</h3>
+                        <p style="color: var(--color-text-secondary);">${containment}</p>
+                    </div>
+                    
+                    <div class="description-section">
+                        <h3>Description</h3>
+                        <p style="color: var(--color-text-secondary); margin-bottom: 15px;">${scp.description}</p>
+                        <p style="color: var(--color-text-secondary);">${additional}</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--color-border);">
+                        <p style="font-size: 12px; color: var(--color-text-secondary); font-style: italic;">
+                            This is a fictional SCP entry inspired by the SCP Foundation collaborative writing project.
+                        </p>
+                    </div>
+                `;
+                modal.classList.add('active');
             });
         });
 
-        closeModal.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
+        closeModal.addEventListener('click', () => { modal.classList.remove('active'); });
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
+        // LOGIN LOGIC (two profiles)
+        const loginOverlay = document.getElementById('loginOverlay');
+        const loginButton = document.getElementById('loginButton');
+        const loginError = document.getElementById('loginError');
+        const userIdInput = document.getElementById('userId');
+        const accessKeyInput = document.getElementById('accessKey');
+        const sessionInfo = document.getElementById('sessionInfo');
+
+        function unlockAs(level, displayName) {
+            document.body.classList.remove('locked');
+            document.body.classList.remove('level3');
+            document.body.classList.remove('level5');
+            document.body.classList.add(level);
+            currentLevel = level;
+            loginOverlay.style.display = 'none';
+
+            if (level === 'level3') {
+                sessionInfo.innerHTML =
+                    'Logged in as: LEVEL 3 – ' + displayName +
+                    ' • Session ID: <span class="redacted">[SESSION-L3-2026-██]</span> • RAISA Monitor: ACTIVE';
+            } else if (level === 'level5') {
+                sessionInfo.innerHTML =
+                    'Logged in as: LEVEL 5 – ' + displayName +
+                    ' • Session ID: <span class="redacted">[SESSION-O5-2026-██]</span> • RAISA Monitor: ACTIVE';
+
+                // O5 gets absolutely everything: remove all redactions
+                const l3Redacts = document.querySelectorAll('.redact-l3');
+                l3Redacts.forEach(el => {
+                    el.classList.remove('redact-l3');
+                    el.style.backgroundColor = 'transparent';
+                    el.style.color = '';
+                });
+            }
+        }
+
+        loginButton.addEventListener('click', () => {
+            const uid = userIdInput.value.trim().toLowerCase();
+            const key = accessKeyInput.value.trim();
+
+            // Level 3 basic profile (level3 / level3)
+            if (uid === 'level3' && key === 'level3') {
+                unlockAs('level3', 'SITE-19 RESEARCHER');
+                loginError.style.display = 'none';
+            }
+            // Level 5 / O5 profile (admin / admin)
+            else if (uid === 'admin' && key === 'admin') {
+                unlockAs('level5', 'O5 OVERRIDE');
+                loginError.style.display = 'none';
+            } else {
+                loginError.style.display = 'block';
             }
         });
 
+        accessKeyInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') loginButton.click();
+        });
     </script>
 </body>
+
 </html>
